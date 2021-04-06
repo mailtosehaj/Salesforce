@@ -1,0 +1,27 @@
+public class DualBoxController {
+    
+    @AuraEnabled
+    public static Map<String, String> getFieldNames(String sObjectName){
+       Map<String,String> nameValue = new Map<String,String>();
+        String[] types = new String[]{sObjectName};
+            List<String> fieldNameList = new List<String>();    
+        Schema.DescribeSobjectResult[] results = Schema.describeSObjects(types);
+        System.debug('Got describe information for ' + results.size() + ' sObjects.');
+        
+        for(Schema.DescribeSobjectResult res : results) {
+            System.debug('Number of fields: ' + res.fields.getMap().size());
+            //Map<String, Schema.SObjectField> MapofField = res.fields.getMap();
+            for(String fieldName:res.fields.getMap().keySet()){
+                //String fieldLabel = fieldName.get(fieldName).getDescribe().getLabel();
+                system.debug(fieldName);
+                //fieldNameList.add(fieldName);
+                //fieldNameList.add(res.fields.getMap().get(fieldName).getDescribe().getLabel());
+                  nameValue.put(fieldName,res.fields.getMap().get(fieldName).getDescribe().getLabel());
+                system.debug('nameValue================='+nameValue);
+            }
+        }
+        return nameValue;
+    }
+    
+    
+}
