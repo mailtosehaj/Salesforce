@@ -1,0 +1,23 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" Controller="DualBoxController" >
+    
+        <aura:attribute name="options" type="List" default=""/>
+        <aura:attribute name="SelectedFields" type="List" default=""/>
+        <aura:attribute name="objectName" type="String" default="Opportunity"/>
+       <aura:attribute name="selectedArray" type="List" default="[]"/>
+        <aura:handler name="init" value="{!this} " action="{!c.doInit} "/> 
+        <lightning:dualListbox name="languages"
+                               aura:id="FieldList"
+                               label= "Select Fields"
+                               sourceLabel="Available"
+                               selectedLabel="Selected"
+                               fieldLevelHelp="Select your preferred languages"
+                               options="{!v.options}"
+                               value="{!v.SelectedFields}"
+                               onchange="{!c.handleChange}"/>
+        <br/>
+        <lightning:button variant="brand" label="Get Selected " onclick="{!c.getSelected}" />
+       
+    
+
+
+</aura:component>
